@@ -1,5 +1,19 @@
 package com.suse.saltstack.netapi.parser;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
@@ -21,21 +35,6 @@ import com.suse.saltstack.netapi.datatypes.cherrypy.HttpServer;
 import com.suse.saltstack.netapi.datatypes.cherrypy.Stats;
 import com.suse.saltstack.netapi.results.Result;
 import com.suse.saltstack.netapi.results.ResultInfoSet;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.lang.reflect.ParameterizedType;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Parser for Saltstack responses.
@@ -94,7 +93,7 @@ public class JsonParser<T> {
      */
     public T parse(InputStream inputStream) {
         Reader inputStreamReader = new InputStreamReader(inputStream);
-        Reader streamReader = new BufferedReader(inputStreamReader);
+        JsonReader streamReader = new JsonReader(inputStreamReader);
 
         // Parse result type from the returned JSON
         return gson.fromJson(streamReader, type.getType());
