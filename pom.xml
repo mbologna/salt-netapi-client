@@ -158,7 +158,7 @@
     <dependency>
       <groupId>org.glassfish.tyrus</groupId>
       <artifactId>tyrus-container-grizzly-server</artifactId>
-      <version>1.11</version>
+      <version>1.15</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
